@@ -24,8 +24,20 @@
 % Добавляем его значенение в голову результата, поднимаемся выше по рекурсии.
 % Теперь наша цель - предпоследний элемент. И так далее
 
-flatten(List) -> flatten(List, []).
+%%flatten(List) -> flatten(List, []).
+%%
+%%flatten([], Res) -> Res;
+%%flatten([H|T], Res) -> flatten(H, flatten(T, Res));
+%%flatten(H, Res) -> [H|Res].
 
-flatten([], Res) -> Res;
-flatten([H|T], Res) -> flatten(H, flatten(T, Res));
-flatten(H, Res) -> [H|Res].
+flatten(List) -> reverse(flatten(List, [])).
+
+flatten([H=[_|_]|T], Res) -> flatten(T, flatten(H,Res));
+flatten([[]|T], Res) -> flatten(T, Res);
+flatten([H|T], Res) -> flatten(T, [H|Res]);
+flatten([], Res) -> Res.
+
+reverse(List) -> reverse(List, []).
+
+reverse([], Res) -> Res;
+reverse([H|T], Res) -> reverse(T, [H|Res]).
