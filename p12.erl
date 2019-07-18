@@ -11,6 +11,7 @@
 
 %% API
 -export([decode_modified/1]).
+-define(TEST, 1).
 
 % Написать декодер для модифицированного алгоритма RLE:
 % p12:decode_modified([{4,a},b,{2,c},{2,a},d,{4,e}]).
@@ -30,3 +31,10 @@ duplicate(Cnt,El,Res) -> duplicate(Cnt-1, El, [El|Res]).
 
 reverse([], Res) -> Res;
 reverse([H|T], Res) -> reverse(T, [H|Res]).
+
+-ifdef(TEST).
+
+-include_lib("eunit/include/eunit.hrl").
+p12_test() -> ?assert(decode_modified([{4,a},b,{2,c},{2,a},d,{4,e}]) =:= [a,a,a,a,b,c,c,a,a,d,e,e,e,e]).
+
+-endif.

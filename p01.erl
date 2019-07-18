@@ -11,6 +11,7 @@
 
 %% API
 -export([last/1]).
+-define(TEST, 1).
 
 % last/1 возвращает последний элемент заданного списка
 % p01:last([a,b,c,d,e,f]).
@@ -20,3 +21,14 @@
 
 last([H|[]]) -> H;
 last([_|T]) -> last(T).
+
+-ifdef(TEST).
+
+-include_lib("eunit/include/eunit.hrl").
+p01_test_() -> [
+  ?_assert(last([one, two, three]) =:= three),
+  ?_assert(last(["one", "two"]) =:= "two"),
+  ?_assert(last([<<"one">>, <<"two">>, <<"three">>]) =:= <<"three">>)
+].
+
+-endif.

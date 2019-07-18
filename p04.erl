@@ -11,6 +11,7 @@
 
 %% API
 -export([len/1]).
+-define(TEST, 1).
 
 % len/1 подсчитывает количество элементов в заданном списке
 % p04:len([]).
@@ -24,3 +25,14 @@ len(List) -> len(List, 0).
 
 len([], N) -> N;
 len([_|T], N) -> len(T, N+1).
+
+-ifdef(TEST).
+
+-include_lib("eunit/include/eunit.hrl").
+p04_test_() -> [
+  ?_assert(len([one, two, three]) =:= 3),
+  ?_assert(len(["one", "two"]) =:= 2),
+  ?_assert(len([<<"one">>, <<"two">>, <<"three">>]) =:= 3)
+].
+
+-endif.

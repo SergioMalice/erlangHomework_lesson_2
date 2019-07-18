@@ -11,6 +11,7 @@
 
 %% API
 -export([encode_modified/1]).
+-define(TEST, 1).
 
 % encode/1 кодирует список при помощи модифицированного алгоритма RLE, к примеру
 % p11:encode_modified([a,a,a,a,b,c,c,a,a,d,e,e,e,e]).
@@ -29,3 +30,10 @@ encode_modified([H|[]], Cnt, Res) -> reverse([{Cnt, H}|Res], []).
 
 reverse([], Res) -> Res;
 reverse([H|T], Res) -> reverse(T, [H|Res]).
+
+-ifdef(TEST).
+
+-include_lib("eunit/include/eunit.hrl").
+p11_test() -> ?assert(encode_modified([a,a,a,a,b,c,c,a,a,d,e,e,e,e]) =:= [{4,a},b,{2,c},{2,a},d,{4,e}]).
+
+-endif.

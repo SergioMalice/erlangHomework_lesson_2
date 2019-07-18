@@ -11,6 +11,7 @@
 
 %% API
 -export([encode/1]).
+-define(TEST, 1).
 
 % encode/1 кодирует список алгоритмом RLE, к примеру
 % p10:encode([a,a,a,a,b,c,c,a,a,d,e,e,e,e]).
@@ -28,3 +29,10 @@ encode([H|[]], Cnt, Res) -> reverse([{Cnt, H}|Res], []).
 
 reverse([], Res) -> Res;
 reverse([H|T], Res) -> reverse(T, [H|Res]).
+
+-ifdef(TEST).
+
+-include_lib("eunit/include/eunit.hrl").
+p10_test() -> ?assert(encode([a,a,a,a,b,c,c,a,a,d,e,e,e,e]) =:= [{4,a},{1,b},{2,c},{2,a},{1,d},{4,e}]).
+
+-endif.

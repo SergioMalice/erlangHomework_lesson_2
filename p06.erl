@@ -11,6 +11,7 @@
 
 %% API
 -export([is_palindrome/1]).
+-define(TEST, 1).
 
 % is_palindrome/1 определяет, является ли заданный список палиндромом
 % p06:is_palindrome([1,2,3,2,1]).
@@ -26,3 +27,13 @@ is_palindrome(List) -> is_palindrome(List, [], List).
 is_palindrome([], Rev, Rev) -> true;
 is_palindrome([], _Rev, _NotEqual) -> false;
 is_palindrome([H|T], Rev, _List) -> is_palindrome(T, [H|Rev], _List).
+
+-ifdef(TEST).
+
+-include_lib("eunit/include/eunit.hrl").
+p06_test_() -> [
+  ?_assert(is_palindrome([1,2,3,2,1]) =:= true),
+  ?_assert(is_palindrome([1,2,3]) =:= false)
+].
+
+-endif.

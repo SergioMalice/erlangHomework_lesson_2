@@ -11,6 +11,7 @@
 
 %% API
 -export([but_last/1]).
+-define(TEST, 1).
 
 % but_last/1 возвращает два последних элемента заданного списка
 % p02:but_last([a,b,c,d,e,f]).
@@ -20,3 +21,14 @@
 
 but_last([_,_|[]] = L) -> L;
 but_last([_|T]) -> but_last(T).
+
+-ifdef(TEST).
+
+-include_lib("eunit/include/eunit.hrl").
+p02_test_() -> [
+  ?_assert(but_last([one, two, three]) =:= [two, three]),
+  ?_assert(but_last(["one", "two"]) =:= ["one", "two"]),
+  ?_assert(but_last([<<"one">>, <<"two">>, <<"three">>]) =:= [<<"two">>, <<"three">>])
+].
+
+-endif.

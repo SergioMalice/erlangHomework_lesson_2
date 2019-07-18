@@ -11,6 +11,7 @@
 
 %% API
 -export([compress/1]).
+-define(TEST, 1).
 
 % compress/1 последовательно удаляет дубликаты входящего списка.
 % p08:compress([a,a,a,a,b,c,c,a,a,d,e,e,e,e]).
@@ -30,3 +31,10 @@ compress([H|[]], Res) -> reverse([H|Res], []).
 
 reverse([], Res) -> Res;
 reverse([H|T], Res) -> reverse(T, [H|Res]).
+
+-ifdef(TEST).
+
+-include_lib("eunit/include/eunit.hrl").
+p08_test() -> ?assert(compress([a,a,a,a,b,c,c,a,a,d,e,e,e,e]) =:= [a,b,c,a,d,e]).
+
+-endif.

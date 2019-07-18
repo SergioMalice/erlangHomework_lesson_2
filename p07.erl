@@ -11,6 +11,7 @@
 
 %% API
 -export([flatten/1]).
+-define(TEST, 1).
 
 % flatten/1 формирует список из элементов входящего списка,
 % вложенных на любом уровне. К примеру,
@@ -41,3 +42,10 @@ reverse(List) -> reverse(List, []).
 
 reverse([], Res) -> Res;
 reverse([H|T], Res) -> reverse(T, [H|Res]).
+
+-ifdef(TEST).
+
+-include_lib("eunit/include/eunit.hrl").
+p07_test() -> ?assert(flatten([a,[],[b,[c,d]],e]) =:= [a,b,c,d,e]).
+
+-endif.

@@ -11,6 +11,7 @@
 
 %% API
 -export([reverse/1]).
+-define(TEST, 1).
 
 % reverse/1 переворачивает заданный список. К примеру,
 % p05:reverse([1,2,3]).
@@ -20,3 +21,14 @@ reverse(List) -> reverse(List, []).
 
 reverse([], Res) -> Res;
 reverse([H|T], Res) -> reverse(T, [H|Res]).
+
+-ifdef(TEST).
+
+-include_lib("eunit/include/eunit.hrl").
+p05_test_() -> [
+  ?_assert(reverse([one, two, three]) =:= [three, two, one]),
+  ?_assert(reverse(["one", "two"]) =:= lists:reverse(["one", "two"])),
+  ?_assert(reverse([<<"one">>, <<"two">>, <<"three">>]) =:= lists:reverse([<<"one">>, <<"two">>, <<"three">>]))
+].
+
+-endif.
