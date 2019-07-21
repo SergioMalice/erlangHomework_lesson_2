@@ -1,18 +1,11 @@
-%%%-------------------------------------------------------------------
-%%% @author sergeyb
-%%% @copyright (C) 2019, <COMPANY>
-%%% @doc
-%%%
-%%% @end
-%%% Created : 21. Июнь 2019 12:33
-%%%-------------------------------------------------------------------
 -module(p15).
 -author("sergeyb").
 
 %% API
 -export([replicate/2]).
--define(TEST, 1).
 
+% Запуск всех тестов make tests из корня проекта
+%
 % Написать функцию-репликатор всех элементов входящего списка:
 % p15:replicate([a,b,c], 3).
 % [a,a,a,b,b,b,c,c,c,d,d,d].
@@ -34,13 +27,3 @@ duplicate(Cnt,El,Res) -> duplicate(Cnt-1, El, [El|Res]).
 
 reverse([], Res) -> Res;
 reverse([H|T], Res) -> reverse(T, [H|Res]).
-
--ifdef(TEST).
-
--include_lib("eunit/include/eunit.hrl").
-p15_test_() -> [
-  ?_assert(replicate([a,b,c,c,d], 1) =:= [a,b,c,c,d]),
-  ?_assert(replicate([1,2,3], 2) =:= [1,1,2,2,3,3])
-].
-
--endif.

@@ -1,3 +1,9 @@
-*.beam
+ebin
+.idea
+.erlang.mk
+.gitignore
+logs
+
 *.iml
-.idea/*
+*.d
+*.beam
